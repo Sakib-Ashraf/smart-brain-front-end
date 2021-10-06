@@ -1,0 +1,20 @@
+.profile-model{
+    background-color: rgba(255,255,255, 0.8);
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+}
+.toggle-close{
+    font-size: 3rem;
+    font-style: bold;
+    cursor: pointer;
+}
+.toggle-close:hover{
+    color:red;
+    cursor: pointer;
+}
