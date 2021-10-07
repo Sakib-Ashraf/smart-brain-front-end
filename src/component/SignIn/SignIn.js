@@ -18,6 +18,10 @@ class SignIn extends Component {
         this.setState({ SignInPassword: event.target.value });
     };
 
+    saveSessionToken = (token) => {
+        window.sessionStorage.setItem('token', token);
+    };
+
 
     onSubmitSignIn = () => {
         fetch('http://localhost:3300/signin', {
@@ -31,12 +35,28 @@ class SignIn extends Component {
 			}),
 		})
 			.then((response) => response.json())
-			.then((user) => {
-				if (user.id) {
-					this.props.loadUser(user);
-					this.props.onRouteChange('home');
+			.then((data) => {
+				if (data.userId && data.success === 'true') {
+                    this.saveSessionToken(data.token);
+                    fetch(`http://localhost:3300/profile/${data.userId}`, {
+						method: 'get',
+						headers: {
+							'Content-Type': 'application/json',
+							'authorization': data.token,
+						},
+					})
+						.then((response) => response.json())
+						.then((user) => {
+							if (user && user.email) {
+								this.props.loadUser(user);
+								this.props.onRouteChange('home');
+							}
+						})
+						.catch(console.log);
+					
 				}
-			});
+            })
+            .catch(console.log);
     };
 
     render() {

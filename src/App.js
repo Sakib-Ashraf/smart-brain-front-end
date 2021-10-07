@@ -146,8 +146,43 @@ class App extends Component {
     this.state = initState;
   }
 
+  componentDidMount() {
+    const token = window.sessionStorage.getItem('token');
+    if (token) {
+      fetch('http://localhost:3300/signin', {
+			method: 'post',
+			headers: {
+				'Content-Type': 'application/json',
+				'authorization': token,
+			},
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if (data && data.id) {
+					fetch(`http://localhost:3300/profile/${data.id}`, {
+						method: 'get',
+						headers: {
+							'Content-Type': 'application/json',
+							authorization: token,
+						},
+					})
+						.then((response) => response.json())
+						.then(user => {
+							if (user && user.email) {
+								this.loadUser(user);
+								this.onRouteChange('home');
+							}
+						})
+						.catch(console.log);
+				}
+			})
+			.catch(console.log);
+    }
+  }
+
   calculateFaceLocations = (data) => {
-    return data.outputs[0].data.regions.map(face => {
+    if (data && data.outputs) {
+      return data.outputs[0].data.regions.map(face => {
       const clarifaiFace = face.region_info.bounding_box;
       const image = document.getElementById("inputImage");
       const width = Number(image.width);
@@ -158,8 +193,8 @@ class App extends Component {
       rightCol: width - clarifaiFace.right_col * width,
       bottomRow: height - clarifaiFace.bottom_row * height,
       };
-      });
-    
+      });}
+    return;
   };
 
   loadUser = (data) => {
@@ -177,7 +212,9 @@ class App extends Component {
   };
 
   displayFaceBoxes = (boxes) => {
-    this.setState({ boxes });
+    if (boxes) {
+      this.setState({ boxes });
+    }
   };
 
   onInputChange = (event) => {
@@ -190,6 +227,7 @@ class App extends Component {
 		method: 'post',
 		headers: {
 			'Content-Type': 'application/json',
+      'authorization': window.sessionStorage.getItem('token'),
 		},
 		body: JSON.stringify({
 			input: this.state.input,
@@ -200,7 +238,10 @@ class App extends Component {
 			if (response) {
 				fetch('http://localhost:3300/image', {
 					method: 'put',
-					headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            'authorization': window.sessionStorage.getItem('token'),
+          },
 					body: JSON.stringify({
 						id: this.state.user.id,
 					}),
@@ -247,9 +288,10 @@ class App extends Component {
 			{isProfileOpen && (
 				<Model>
 					<Profile
+						loadUser={this.loadUser}
 						isProfileOpen={isProfileOpen}
 						toggleModel={this.toggleModel}
-            user={user}
+						user={user}
 					/>
 				</Model>
 			)}
