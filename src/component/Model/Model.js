@@ -1,9 +1,9 @@
-import React,{Component} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './Model.css';
 
 const modelRoot = document.getElementById('model-root');
-class Model extends Component {
+class Model extends React.Component {
     constructor(props) {
         super(props);
         this.el = document.createElement('div');

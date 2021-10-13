@@ -10,6 +10,7 @@ class ProfileIcon extends Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
+        this.signOut = this.signOut.bind(this);
         this.state = {
             dropdownOpen: false,
         };
@@ -17,7 +18,26 @@ class ProfileIcon extends Component {
 
     toggle() {
         this.setState(prevState => ({ dropdownOpen: !prevState.dropdownOpen }));
-    }
+	}
+	
+	signOut() {
+		fetch(`http://localhost:3300/signout`, {
+			method: 'post',
+			headers: {
+			'Content-Type': 'application/json',
+      		'authorization': window.sessionStorage.getItem('token'),
+		},
+		})
+			.then((response) => response.json())
+			.then((resp) => {
+				if (resp.data) {
+					window.sessionStorage.removeItem('token');
+					this.props.onRouteChange('signout');
+				}
+			})
+			.catch(console.log);
+
+	}
 
     render() {
         return (
@@ -43,7 +63,7 @@ class ProfileIcon extends Component {
 						}}
 					>
 						<DropdownItem onClick={() => this.props.toggleModel()}>View Profile</DropdownItem>
-						<DropdownItem onClick={() => this.props.onRouteChange('signout')}>
+						<DropdownItem onClick={() => this.signOut()}>
 							Sign Out
 						</DropdownItem>
 					</DropdownMenu>
