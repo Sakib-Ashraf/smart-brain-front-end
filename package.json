@@ -10,6 +10,7 @@
 		"bootstrap": "^5.1.1",
 		"clarifai": "^2.9.1",
 		"eslint-plugin-prettier": "^3.4.0",
+		"gh-pages": "^3.2.3",
 		"lodash": "^4.17.21",
 		"prettier": "^2.3.2",
 		"react": "^17.0.2",
