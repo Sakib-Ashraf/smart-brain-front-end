@@ -24,7 +24,7 @@ class SignIn extends Component {
 
 
     onSubmitSignIn = () => {
-        fetch('http://localhost:3300/signin', {
+        fetch('https://immense-tor-84997.herokuapp.com/signin', {
 			method: 'post',
 			headers: {
 				'Content-Type': 'application/json',
@@ -37,12 +37,12 @@ class SignIn extends Component {
 			.then((response) => response.json())
 			.then((data) => {
 				if (data.userId && data.success === 'true') {
-                    this.saveSessionToken(data.token);
-                    fetch(`http://localhost:3300/profile/${data.userId}`, {
+					this.saveSessionToken(data.token);
+					fetch(`https://immense-tor-84997.herokuapp.com/profile/${data.userId}`, {
 						method: 'get',
 						headers: {
 							'Content-Type': 'application/json',
-							'authorization': data.token,
+							authorization: data.token,
 						},
 					})
 						.then((response) => response.json())
@@ -53,10 +53,9 @@ class SignIn extends Component {
 							}
 						})
 						.catch(console.log);
-					
 				}
-            })
-            .catch(console.log);
+			})
+			.catch(console.log);
     };
 
     render() {

@@ -16,18 +16,21 @@ class Profile extends Component {
 	};
 
 	onSubmitProfileUpdate = () => {
-        fetch(`http://localhost:3300/profile-update/${this.props.user.id}`, {
-			method: 'post',
-			headers: {
-				'Content-Type': 'application/json',
-				'authorization': window.sessionStorage.getItem('token'),
-			},
-			body: JSON.stringify({
-				name: this.state.name,
-				age: this.state.age,
-				pet: this.state.pet,
-			}),
-		})
+        fetch(
+			`https://immense-tor-84997.herokuapp.com/profile-update/${this.props.user.id}`,
+			{
+				method: 'post',
+				headers: {
+					'Content-Type': 'application/json',
+					authorization: window.sessionStorage.getItem('token'),
+				},
+				body: JSON.stringify({
+					name: this.state.name,
+					age: this.state.age,
+					pet: this.state.pet,
+				}),
+			}
+		)
 			.then((resp) => {
 				if (resp.status === 200 || resp.status === 304) {
 					this.props.toggleModel();

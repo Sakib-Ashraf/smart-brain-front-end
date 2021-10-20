@@ -21,12 +21,12 @@ class ProfileIcon extends Component {
 	}
 	
 	signOut() {
-		fetch(`http://localhost:3300/signout`, {
+		fetch(`https://immense-tor-84997.herokuapp.com/signout`, {
 			method: 'post',
 			headers: {
-			'Content-Type': 'application/json',
-      		'authorization': window.sessionStorage.getItem('token'),
-		},
+				'Content-Type': 'application/json',
+				authorization: window.sessionStorage.getItem('token'),
+			},
 		})
 			.then((response) => response.json())
 			.then((resp) => {

@@ -149,25 +149,28 @@ class App extends Component {
   componentDidMount() {
     const token = window.sessionStorage.getItem('token');
     if (token) {
-      fetch('http://localhost:3300/signin', {
+      fetch('https://immense-tor-84997.herokuapp.com/signin', {
 			method: 'post',
 			headers: {
 				'Content-Type': 'application/json',
-				'authorization': token,
+				authorization: token,
 			},
 		})
 			.then((response) => response.json())
 			.then((data) => {
 				if (data && data.id) {
-					fetch(`http://localhost:3300/profile/${data.id}`, {
-						method: 'get',
-						headers: {
-							'Content-Type': 'application/json',
-							authorization: token,
-						},
-					})
+					fetch(
+						`https://immense-tor-84997.herokuapp.com/${data.id}`,
+						{
+							method: 'get',
+							headers: {
+								'Content-Type': 'application/json',
+								authorization: token,
+							},
+						}
+					)
 						.then((response) => response.json())
-						.then(user => {
+						.then((user) => {
 							if (user && user.email) {
 								this.loadUser(user);
 								this.onRouteChange('home');
@@ -223,11 +226,11 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({ imageUrl: this.state.input });
-    fetch('http://localhost:3300/imageurl', {
+    fetch('https://immense-tor-84997.herokuapp.com/imageurl', {
 		method: 'post',
 		headers: {
 			'Content-Type': 'application/json',
-      'authorization': window.sessionStorage.getItem('token'),
+			authorization: window.sessionStorage.getItem('token'),
 		},
 		body: JSON.stringify({
 			input: this.state.input,
@@ -236,12 +239,12 @@ class App extends Component {
 		.then((response) => response.json())
 		.then((response) => {
 			if (response) {
-				fetch('http://localhost:3300/image', {
+				fetch('https://immense-tor-84997.herokuapp.com/image', {
 					method: 'put',
-          headers: {
-            'Content-Type': 'application/json',
-            'authorization': window.sessionStorage.getItem('token'),
-          },
+					headers: {
+						'Content-Type': 'application/json',
+						authorization: window.sessionStorage.getItem('token'),
+					},
 					body: JSON.stringify({
 						id: this.state.user.id,
 					}),
