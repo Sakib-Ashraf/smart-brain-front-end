@@ -1,57 +1,60 @@
 {
-  "name": "smart-brain-frontend",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
-    "bootstrap": "^5.1.1",
-    "clarifai": "^2.9.1",
-    "eslint-plugin-prettier": "^3.4.0",
-    "lodash": "^4.17.21",
-    "prettier": "^2.3.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-parallax-tilt": "^1.5.51",
-    "react-particles-js": "^3.5.3",
-    "react-scripts": "^4.0.3",
-    "reactstrap": "^8.10.0",
-    "serve": "^12.0.0",
-    "tachyons": "^4.12.0",
-    "tsparticles": "^1.32.0",
-    "web-vitals": "^1.1.2"
-  },
-  "engines": {
-    "node": "14.17.0",
-    "npm": "7.20.3"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "description": "fronted of smart-brain app",
-  "main": "index.js",
-  "author": "Sakib-Ashraf",
-  "license": "ISC"
+	"name": "smart-brain-frontend",
+	"version": "0.1.0",
+	"private": true,
+	"homepage": "https://Sakib-Ashraf.github.io/smart-brain-front-end",
+	"dependencies": {
+		"@testing-library/jest-dom": "^5.14.1",
+		"@testing-library/react": "^11.2.7",
+		"@testing-library/user-event": "^12.8.3",
+		"bootstrap": "^5.1.1",
+		"clarifai": "^2.9.1",
+		"eslint-plugin-prettier": "^3.4.0",
+		"lodash": "^4.17.21",
+		"prettier": "^2.3.2",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-parallax-tilt": "^1.5.51",
+		"react-particles-js": "^3.5.3",
+		"react-scripts": "^4.0.3",
+		"reactstrap": "^8.10.0",
+		"serve": "^12.0.1",
+		"tachyons": "^4.12.0",
+		"tsparticles": "^1.32.0",
+		"web-vitals": "^1.1.2"
+	},
+	"engines": {
+		"node": "14.17.0",
+		"npm": "7.20.3"
+	},
+	"scripts": {
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build",
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"description": "fronted of smart-brain app",
+	"main": "index.js",
+	"author": "Sakib-Ashraf",
+	"license": "ISC"
 }
